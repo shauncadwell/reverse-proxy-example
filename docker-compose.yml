@@ -1,0 +1,30 @@
+version: "3"
+services:
+  sample-java-spring:
+    build:
+      context: ./sample-java-api
+    ports:
+      - "8080:8080"
+    container_name: java-api
+    volumes:
+      - ./sample-java-api:/usr/src/app/api
+      - /usr/src/app/api/node_modules
+  react-ui:
+    build:
+      context: ./simple-example-app
+    ports:
+      - "3000:3000"
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+      - ./simple-example-app:/usr/src/app/my-app
+      - /usr/src/app/my-app/node_modules
+  web-proxy:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./controller
+    ports:
+      - "5000:80"
+    volumes:
+      - /usr/src/app/my-app
