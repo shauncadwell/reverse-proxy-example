@@ -1,15 +1,7 @@
 FROM nginx:latest
+ 
+COPY nginx.conf /etc/nginx/nginx.conf
+# RUN apk update && apk add bash
 
-#!/bin/sh
+EXPOSE 80
 
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-## Remove default nginx index page
-# RUN rm -rf /usr/share/nginx/html/*
-
-# Copy from the stahg 1
-# COPY --from=builder /react-ui/build /usr/share/nginx/html
-
-EXPOSE 8080 80
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]

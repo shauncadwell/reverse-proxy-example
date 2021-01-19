@@ -25,6 +25,6 @@ services:
       dockerfile: Dockerfile
       context: ./controller
     ports:
-      - "5000:80"
+      - "80:80"
     volumes:
       - /usr/src/app/my-app

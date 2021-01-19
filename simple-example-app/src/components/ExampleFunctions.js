@@ -10,7 +10,7 @@ function ExampleFunctions() {
 
   async function postData() {
     const response = api
-      .post(API_BASE_URL)
+      .post()
       .then((res) => {
         return res.data;
       })
@@ -24,7 +24,7 @@ function ExampleFunctions() {
 
   async function getOtherData() {
     const response = api
-      .get(API_BASE_URL)
+      .get()
       .then((res) => {
         return res.data;
       })
