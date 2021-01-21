@@ -1,6 +1,19 @@
 version: "3"
+
 services:
+  web-proxy:
+    restart: always
+    container_name: 'web-proxy'
+    build:
+      dockerfile: Dockerfile
+      context: ./controller
+    ports:
+      - "80:80"
+    volumes:
+      - /usr/src/app/my-app
+
   sample-java-spring:
+    container_name: "sample-java-spring"
     build:
       context: ./sample-java-api
     ports:
@@ -9,7 +22,9 @@ services:
     volumes:
       - ./sample-java-api:/usr/src/app/api
       - /usr/src/app/api/node_modules
+
   react-ui:
+    container_name: 'react-ui'
     build:
       context: ./simple-example-app
     ports:
@@ -19,12 +34,3 @@ services:
     volumes:
       - ./simple-example-app:/usr/src/app/my-app
       - /usr/src/app/my-app/node_modules
-  web-proxy:
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./controller
-    ports:
-      - "80:80"
-    volumes:
-      - /usr/src/app/my-app
